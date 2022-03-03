@@ -1,54 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    {{>head}}
-  </head>
-  <body id="samples">
+<html>
 
-    {{>menu}}
+<head>
+	<meta charset="UTF-8">
+	<title>Ahmed - TEXT Generator - P72</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/css/style.css">
+	<script src="http://localhost:8080/assets/js/script.js"></script>
+	<style>
+		.footer2 {
+			text-align: center !important;
+    margin-left: 72% !important;
+    /*margin-top: 10%;*/
+    width: 100%;
+		}
+		</style>
+</head>
 
-    <div id="content" class="ui container padded grid relaxed">
-      <div id="doc" class="column eight wide">
-        <div class="doc-overview text container">
+<body onload="generate()">
+  {{#isLoggedIn}}
+	<div id="templateDiv" class="textDiv">
+		<p>Template</p>
+		<div class="dropdown">
+			<div class="dropBtn">Presets  ▾</div>
+			<div class="dropdown-content">
+				<div onclick="applyPreset(0)">C# Property</div>
+				<div onclick="applyPreset(1)">SQL Insert</div>
+				<div onclick="applyPreset(2)">Variable</div>
+			</div>
+		</div>
+		<textarea id="template" oninput="generate()">
+<Profile>
+<ApplicationRef>
+<Reference class="sailpoint.object.Application" id="^0^" name="^1^"/>
+</ApplicationRef>
+<Constraints>
+<Filter operation="CONTAINS_ALL" property="^2^">
+<Value>
+<List>
+<String>^3^</String>
+</List>
+</Value>
+</Filter>
+</Constraints>
+</Profile>
+</textarea>
+	</div>
+	<div id="dataDiv" class="textDiv">
+		<p>Data with example</p>
+		<label class="checkboxContainer">Trim
+			<input type="checkbox" id="trimCheckbox" onclick="generate()" checked>
+			<span class="checkmark"></span>
+		</label>
+		<textarea id="data" oninput="generate()">App ID, App Name, Property, Entitlement&#13;&#10;2c90be516f6fb1f7016f7e5041de1e99, FARM - Compliance Code of Ethics (COE), Entitlement, compliancePolandEmployee</textarea>
+	</div>
+	<div id="outputDiv" class="textDiv">
+		<p>Output</p>
+		<textarea id="output" onclick="this.select()" readonly>AA</textarea>
 
-          <h2 class="ui dividing header" data-se="overview-doc-header">
-            Custom Hosted Login + Express JS Example
-          </h2>
+	</div>
+	<div class="footer2">
+		<button class="download" onclick=saveTextAsFile(output.value,'output-data.txt')>Download Output</button>
+	  {{/isLoggedIn}}
+	<footer>
 
-          {{^isLoggedIn}}
-            <p>Hello!</p>
-            <p>If you're viewing this page then you have successfully configured this example server.  Your server configuration is listed on the right.</p>
-            <p>
-              This example shows you how to use the <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">Okta OIDC Middleware Library</a>
-              and the <a href="https://github.com/okta/okta-signin-widget">Okta Sign In Wiget</a> to add the <a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Authorization Code Flow</a> to your application.
-            </p>
-            <p>
-              This combination is useful when you want to leverage the features of the Sign-In Widget, and the session creation features of the OIDC Middleware Library.
-            </p>
+		<p class="ahmed">Ahmed Hisham - P72</p>
 
-          {{/isLoggedIn}}
 
-          {{#isLoggedIn}}
-            <p>Welcome back, {{userinfo.name}}!</p>
-            <p>You have successfully authenticated against your Okta org, and have been redirected back to this application.  Here are some cool things to know:</p>
-            <ul>
-              <li>The <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">Okta OIDC Middleware Library</a> library has created a local cookie session for you, to persist your authentication.</li>
-              <li>The session contains the information retrieved from the <a href="https://developer.okta.com/docs/api/resources/oidc#get-user-information">User Info Endpoint</a> of the configured issuser. This information is automatically persisted for you, and can be read from <code>req.userContext.userinfo</code></li>
-              <li>Visit the <a href="/profile">My Profile</a> page in this application to see an example of using this data.</li>
-            </ul>
-            <p></p>
-          {{/isLoggedIn}}
+		{{^isLoggedIn}}
+		<p>Please Login in</p>
 
-          {{^isLoggedIn}}
-            <form method="get" action="/login">
-              <button id="login-button" class="ui primary button" type="submit">Log In</button>
-            </form>
-          {{/isLoggedIn}}
-        </div>
-      </div>
+	  {{/isLoggedIn}}
 
-      {{>server-config}}
 
-    </div>
-  </body>
+
+	  {{^isLoggedIn}}
+		<form method="get" action="/login">
+		  <button id="login-button" class="ui primary button" type="submit">Log In</button>
+		</form>
+	  {{/isLoggedIn}}
+
+	  
+	  </footer>
+	</div>
+</body>
+
 </html>
