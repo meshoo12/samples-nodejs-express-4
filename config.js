@@ -24,7 +24,7 @@ module.exports = {
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       issuer: ISSUER,
-      appBaseUrl: 'https://egypt-covid-hospitals.netlify.app',
+       appBaseUrl: 'http://localhost:8080',
       scope: 'openid profile email',
       testing: {
         disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK
